@@ -19,6 +19,7 @@ function connect(url, cookie) -- called by the GUI
 end
 
 local startTime = socket.gettime()*1000 -- questionable use of socket
+local lastFrame = startTime
 local gameNo = 0
 local state = {}
 
@@ -48,6 +49,7 @@ local previousGameStatus = bootStatus
 while true do
     local gameStatus = getGameStatus()
     local sendFrame = false
+    local time = socket.gettime()*1000
 
     if gameStatus == 1 then -- piece active
         local stateChanged = false
@@ -109,8 +111,13 @@ while true do
 
     end
 
+    -- send a frame every 5 seconds no matter what, to stop the connection from dying
+    if time - lastFrame >= 5000 then -- 5 seconds
+        sendFrame = true
+    end
+
     if sendFrame then
-        local ms = math.floor(socket.gettime()*1000 - startTime)
+        local ms = math.floor(time - startTime)
         local score = getScore()
         local lines = getLines()
         local level = getLevel()
@@ -126,9 +133,11 @@ while true do
         local s = makeFrame(ms, score, lines, level, preview, playfield, gameNo, statistics)
 
         if conn then
-            -- print("Sending frame! " .. math.random())
+            print("Sending frame! " .. math.random())
             wssend(conn, 2, s)
         end
+
+        lastFrame = time
     end
 
     previousGameStatus = gameStatus
