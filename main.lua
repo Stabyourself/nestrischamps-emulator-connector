@@ -133,7 +133,7 @@ while true do
         local s = makeFrame(ms, score, lines, level, preview, playfield, gameNo, statistics)
 
         if conn then
-            print("Sending frame! " .. math.random())
+            -- print("Sending frame! " .. math.random())
             wssend(conn, 2, s)
         end
 
