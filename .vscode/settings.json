@@ -1,0 +1,12 @@
+{
+    "Lua.diagnostics.globals": [
+        "love",
+        "emu",
+        "iup",
+        "memory",
+        "socket"
+    ],
+    "Lua.diagnostics.disable": [
+        "lowercase-global"
+    ]
+}
