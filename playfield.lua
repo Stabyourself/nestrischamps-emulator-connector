@@ -5,6 +5,9 @@ function playfield.initialize()
 
     for x = 1, 10 do
         playfield.blocks[x] = {}
+        for y = 1, 20 do
+            playfield.blocks[x][y] = "00"
+        end
     end
 
     playfield.invalid = false
@@ -79,12 +82,6 @@ function playfield.invalidate()
 end
 
 function playfield.getBinaryString()
-    -- if we never rendered the playfield, just do it now so we're safe
-    if not playfield.blocks[1][1] then
-        playfield.invalidate()
-        playfield.update()
-    end
-
     -- convert to bitstring (bad code)
     local binaryString = ""
 
