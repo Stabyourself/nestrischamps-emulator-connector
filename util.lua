@@ -51,3 +51,9 @@ function makeFrame(ms, gameNo, score, lines, level, preview, playfield, statisti
 
     return out
 end
+
+function log(...)
+    if LOGGING then
+        print(...)
+    end
+end

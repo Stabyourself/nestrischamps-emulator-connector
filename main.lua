@@ -37,7 +37,9 @@ function newGameStarted()
     playfield.initialize()
 end
 
+
 playfield.initialize()
+frameManager.update(0, 0)
 
 
 local previousPieceState = -1
@@ -89,7 +91,7 @@ while true do
             end
 
         elseif pieceState == 4 or pieceState == 6 then -- line clear
-            if gameStatus == 4 and previousPieceState ~= 4 then -- line clear go brrr
+            if pieceState == 4 and previousPieceState ~= 4 then -- line clear go brrr
                 playfield.lineClearAnimation(getLinesBeingCleared())
             end
 
@@ -118,14 +120,17 @@ while true do
 
     -- send a frame every 5 seconds no matter what, to stop the connection from dying
     if time - lastFrame >= 5000 then -- 5 seconds
-        local resendFrame = true
+        resendFrame = true
     end
 
     if (newFrame or resendFrame) and conn then
-        -- print("Sending frame! " .. math.random())
+        local ms = math.floor(time - startTime)
 
         if newFrame then
-            frameManager.update(math.floor(time - startTime), gameNo)
+            frameManager.update(ms, gameNo)
+            log("Sending new frame (" .. ms .. ")")
+        elseif resendFrame then
+            log("Resending an old frame.")
         end
 
         wssend(conn, 2, frameManager.frame)
