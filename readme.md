@@ -16,4 +16,4 @@ Because OCR is slow and unnecessary for emulators.
 
 If it worked, it should say "Connected successfully!". You can then go to your renderer (go to https://nestrischamps.herokuapp.com/renderers and select Simple 1p) and it should display any game you start.
 
-To find your cookie, you can go to your browser's devtools while on the NestrisChamps website. You'll find Cookies in the "Application" tab in webkit and the "Storage" tab in Firefox. It'll need to be formatted like `nsid=s%123abc...`
+To find your cookie, you can go to your browser's devtools while on the NestrisChamps website. You'll find Cookies in the "Application" tab in webkit and the "Storage" tab in Firefox. It looks something like `s%123ABC...`

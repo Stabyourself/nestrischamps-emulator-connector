@@ -145,7 +145,8 @@ while true do
             log("Resending an old frame.")
         end
 
-        wssend(conn, 2, frameManager.frame)
+        local success = wssend(conn, 2, frameManager.frame)
+        --todo: something if not success (reconnect? hcf?)
 
         lastFrame = time
     end

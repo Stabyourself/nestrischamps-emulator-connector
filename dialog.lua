@@ -3,7 +3,7 @@ require("iuplua")
 local dialog
 
 local defaultUrl = DEFAULTURL or "ws://nestrischamps.herokuapp.com/ws/room/producer"
-local defaultCookie = DEFAULTCOOKIE or "nsid="
+local defaultCookie = DEFAULTCOOKIE or ""
 
 local urlInput = iup.text{size="400x",value=defaultUrl}
 local cookieInput = iup.text{size="400x",value=defaultCookie}

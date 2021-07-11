@@ -120,10 +120,8 @@ local function wsupgrade( wsconn )
 	-- Generate key/nonce, 16 bytes base64-encoded
 	local key = "2l6ddR5P/VGWXrsCD6n3ZQ=="
 	-- Ref: https://stackoverflow.com/questions/18265128/what-is-sec-websocket-key-for
-	local req = string.format("GET %s HTTP/1.1\r\nHost: %s\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Key: %s\r\nSec-WebSocket-Version: 13\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\r\nCookie: %s\r\n%s\r\n",
+	local req = string.format("GET %s HTTP/1.1\r\nHost: %s\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Key: %s\r\nSec-WebSocket-Version: 13\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\r\nCookie: nsid=%s\r\n%s\r\n",
 		wsconn.path, wsconn.ip, key, wsconn.cookie, uhead)
-
-    -- local req = "GET wss://nestrischamps.herokuapp.com/ws/room/u/mauricesy/producer HTTP/1.1\r\nHost: nestrischamps.herokuapp.com\r\nConnection: Upgrade\r\nPragma: no-cache\r\nCache-Control: no-cache\r\n\r\nUpgrade: websocket\r\nOrigin: https://nestrischamps.herokuapp.com\r\nSec-WebSocket-Version: 13\r\nAccept-Encoding: gzip, deflate, br\r\nAccept-Language: en,de-DE;q=0.9,de;q=0.8,en-US;q=0.7\r\nCookie: nsid=s%3A282130b1-b535-4098-a982-3aa43933e726.HR7vSkYDeraEQ15ixcdlNcZyEN8pKAEYlBamUJO7r4g\r\nSec-WebSocket-Key: 6vJu97aCUMa1/jwEs6R8WA==\r\nSec-WebSocket-Extensions: permessage-deflate; client_max_window_bits\r\n"
 
 	-- Send request.
 	D("wsupgrade() sending %1", req)
