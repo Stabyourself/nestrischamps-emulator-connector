@@ -42,4 +42,6 @@ dialog =
         } -- /vbox
     }
 
-dialog:show()
+function showDialog()
+    dialog:show()
+end

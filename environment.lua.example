@@ -1,4 +1,5 @@
 DEFAULTURL = "ws://nestrischamps.herokuapp.com/ws/room/producer"
 DEFAULTCOOKIE = "nsid="
 
+AUTOCONNECT = false
 LOGGING = false

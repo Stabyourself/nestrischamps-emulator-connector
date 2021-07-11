@@ -46,6 +46,13 @@ local previousPieceState = -1
 local previousGameState = -1
 
 
+
+if AUTOCONNECT then
+    connect(DEFAULTURL, DEFAULTCOOKIE)
+else
+    showDialog()
+end
+
 while true do
     local gameState = getGameState()
     local pieceState = getPieceState()
