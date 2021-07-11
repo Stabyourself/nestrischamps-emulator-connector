@@ -10,7 +10,7 @@ function toBits(num,bits)
 end
 
 
-function makeFrame(ms, score, lines, level, preview, playfield, gameNo, statistics)
+function makeFrame(ms, gameNo, score, lines, level, preview, playfield, statistics)
     -- all of this is bad and slow
     bits = {
         "001", -- version

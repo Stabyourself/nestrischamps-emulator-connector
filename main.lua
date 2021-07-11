@@ -3,6 +3,7 @@ require "dialog"
 require "lib.websocket"
 require "getters"
 require "util"
+local frameManager = require "frameManager"
 local playfield = require "playfield"
 
 
@@ -46,8 +47,10 @@ local previousGameState = -1
 while true do
     local gameState = getGameState()
     local pieceState = getPieceState()
-    local sendFrame = false
     local time = socket.gettime()*1000
+
+    local newFrame = false
+    local resendFrame = false
 
     if gameState == 4 then --ingame, rocket, highscoreentry
         if previousGameState ~= 4 then -- just started a game!
@@ -63,7 +66,7 @@ while true do
             end
 
             -- check if the state changed!
-            -- ways the state can change in status 1:
+            -- ways the state can change in pieceState 1:
             --     pieceX or pieceY changed (movement)
             --     currentPiece changes (rotation, piece entry)
 
@@ -75,7 +78,7 @@ while true do
             end
 
             if stateChanged then
-                sendFrame = true
+                newFrame = true
                 playfield.invalidate()
                 playfield.update()
 
@@ -91,11 +94,11 @@ while true do
             end
 
             if playfield.lineClearUpdate() then
-                sendFrame = true
+                newFrame = true
             end
 
         elseif pieceState == 5 then -- dummy frame, but we're abusing it for score update.
-            sendFrame = true
+            newFrame = true
 
         elseif pieceState  == 10 then -- curtain + rocket
             if previousPieceState ~= 10 then
@@ -105,7 +108,7 @@ while true do
             if playfield.curtainUpdate() then
                 playfield.invalidate()
                 playfield.update()
-                sendFrame = true
+                newFrame = true
             end
 
         end
@@ -115,29 +118,17 @@ while true do
 
     -- send a frame every 5 seconds no matter what, to stop the connection from dying
     if time - lastFrame >= 5000 then -- 5 seconds
-        sendFrame = true
+        local resendFrame = true
     end
 
-    if sendFrame then
-        local ms = math.floor(time - startTime)
-        local score = getScore()
-        local lines = getLines()
-        local level = getLevel()
-        local preview = getNextPiece()
+    if (newFrame or resendFrame) and conn then
+        -- print("Sending frame! " .. math.random())
 
-        local statistics = {}
-        for i = 1, 7 do
-            statistics[i] = getPieceStatistic(i)
+        if newFrame then
+            frameManager.update(math.floor(time - startTime), gameNo)
         end
 
-        local playfield = playfield.getBinaryString()
-
-        local s = makeFrame(ms, score, lines, level, preview, playfield, gameNo, statistics)
-
-        if conn then
-            -- print("Sending frame! " .. math.random())
-            wssend(conn, 2, s)
-        end
+        wssend(conn, 2, frameManager.frame)
 
         lastFrame = time
     end
