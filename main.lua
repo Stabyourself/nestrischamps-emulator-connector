@@ -24,8 +24,8 @@ local gameNo = 0
 local state = {}
 
 function newGameStarted()
-    print("Started a game")
     gameNo = gameNo + 1
+    print("Started game #" .. gameNo)
 
     state = {
         pieceX = -1,
@@ -38,78 +38,80 @@ end
 
 playfield.initialize()
 
-local bootStatus = getGameStatus()
-if bootStatus >= 1 and bootStatus <= 10 then -- ingame when this script started
-    newGameStarted()
-end
-local previousGameStatus = bootStatus
 
+local previousPieceState = -1
+local previousGameState = -1
 
 
 while true do
-    local gameStatus = getGameStatus()
+    local gameState = getGameState()
+    local pieceState = getPieceState()
     local sendFrame = false
     local time = socket.gettime()*1000
 
-    if gameStatus == 1 then -- piece active
-        local stateChanged = false
-
-        if previousGameStatus == 0 then -- just started a game!
+    if gameState == 4 then --ingame, rocket, highscoreentry
+        if previousGameState ~= 4 then -- just started a game!
             newGameStarted()
         end
 
-        if previousGameStatus == 8 then -- line clear done
-            playfield.invalidate()
-            stateChanged = true
-        end
+        if pieceState == 1 then -- piece active
+            local stateChanged = false
 
-        -- check if the state changed!
-        -- ways the state can change in status 1:
-        --     pieceX or pieceY changed (movement)
-        --     currentPiece changes (rotation, piece entry)
+            if previousPieceState == 8 then -- line clear done
+                playfield.invalidate()
+                stateChanged = true
+            end
 
-        local pieceX, pieceY = getCurrentPosition()
-        local pieceID = getCurrentPiece()
+            -- check if the state changed!
+            -- ways the state can change in status 1:
+            --     pieceX or pieceY changed (movement)
+            --     currentPiece changes (rotation, piece entry)
 
-        if pieceX ~= state.pieceX or pieceY ~= state.pieceY or pieceID ~= state.pieceID then
-            stateChanged = true
-        end
+            local pieceX, pieceY = getCurrentPosition()
+            local pieceID = getCurrentPiece()
 
-        if stateChanged then
+            if pieceX ~= state.pieceX or pieceY ~= state.pieceY or pieceID ~= state.pieceID then
+                stateChanged = true
+            end
+
+            if stateChanged then
+                sendFrame = true
+                playfield.invalidate()
+                playfield.update()
+
+                -- update state cache
+                state.pieceX = pieceX
+                state.pieceY = pieceY
+                state.pieceID = pieceID
+            end
+
+        elseif pieceState == 4 or pieceState == 6 then -- line clear
+            if gameStatus == 4 and previousPieceState ~= 4 then -- line clear go brrr
+                playfield.lineClearAnimation(getLinesBeingCleared())
+            end
+
+            if playfield.lineClearUpdate() then
+                sendFrame = true
+            end
+
+        elseif pieceState == 5 then -- dummy frame, but we're abusing it for score update.
             sendFrame = true
-            playfield.invalidate()
-            playfield.update()
 
-            -- update state cache
-            state.pieceX = pieceX
-            state.pieceY = pieceY
-            state.pieceID = pieceID
+        elseif pieceState  == 10 then -- curtain + rocket
+            if previousPieceState ~= 10 then
+                playfield.curtainNum = 0
+            end
+
+            if playfield.curtainUpdate() then
+                playfield.invalidate()
+                playfield.update()
+                sendFrame = true
+            end
+
         end
-
-    elseif gameStatus == 4 or gameStatus == 6 then -- line clear
-        if gameStatus == 4 and previousGameStatus ~= 4 then -- line clear go brrr
-            playfield.lineClearAnimation(getLinesBeingCleared())
-        end
-
-        if playfield.lineClearUpdate() then
-            sendFrame = true
-        end
-
-    elseif gameStatus == 5 then -- dummy frame, but we're abusing it for score update.
-        sendFrame = true
-
-    elseif gameStatus  == 10 then -- curtain + rocket
-        if previousGameStatus ~= 10 then
-            playfield.curtainNum = 0
-        end
-
-        if playfield.curtainUpdate() then
-            playfield.invalidate()
-            playfield.update()
-            sendFrame = true
-        end
-
     end
+
+
 
     -- send a frame every 5 seconds no matter what, to stop the connection from dying
     if time - lastFrame >= 5000 then -- 5 seconds
@@ -140,7 +142,8 @@ while true do
         lastFrame = time
     end
 
-    previousGameStatus = gameStatus
+    previousPieceState = pieceState
+    previousGameState = gameState
 
 	emu.frameadvance()
 end

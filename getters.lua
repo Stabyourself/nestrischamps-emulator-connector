@@ -1,5 +1,9 @@
-function getGameStatus()
+function getPieceState() -- pieceState is a thing for the current piece about which "routine" it's in, like piece dropping, line checks, line clears, etc
     return memory.readbyte(0x0048)
+end
+
+function getGameState() -- gameState is a global thing for which menu/demo/gameplay you're in
+    return memory.readbyte(0x00C0)
 end
 
 function getScore()
