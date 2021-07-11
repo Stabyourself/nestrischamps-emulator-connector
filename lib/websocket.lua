@@ -36,8 +36,7 @@ local CHUNKSIZE = 2048
 local DEFAULTMSGTIMEOUT = 0 -- drop connection if no message in this time (0=no timeout)
 
 local timenow = socket.gettime or os.time -- use hi-res time if available
-local unpack = unpack or table.unpack -- luacheck: ignore 143
-local LOG = (luup and luup.log) or ( function(msg,level) print(level or 50,msg) end )
+local LOG = function(msg,level) print(level or 50,msg) end
 
 function dump(t, seen)
 	if t == nil then return "nil" end

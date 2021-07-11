@@ -1,5 +1,5 @@
 DEFAULTURL = "ws://nestrischamps.herokuapp.com/ws/room/producer"
 DEFAULTCOOKIE = ""
 
-AUTOCONNECT = false
-LOGGING = false
+AUTOCONNECT = false -- skips the dialog and uses the above values instead
+LOGGING = false -- prints more stuff to console
