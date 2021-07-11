@@ -173,7 +173,7 @@ local function connect( ip, port )
 	if not sock then
 		return nil, "Can't get socket for connection"
 	end
-	sock:settimeout( 15 )
+	sock:settimeout( 5 )
 	local r, e = sock:connect( ip, port )
 	if r then
 		return sock

@@ -16,6 +16,11 @@ function connect(url, cookie) -- called by the GUI
         return
     else
         print("Connected successfully!")
+
+        emu.registerexit(function()
+            -- try our best to disconnect the socket on exit
+            wsclose(conn)
+        end)
     end
 end
 
