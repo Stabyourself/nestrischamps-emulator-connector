@@ -1,6 +1,9 @@
 -- find out which emu we're doing
+-- this isn't optimal but I couldn't find a way to properly figure out the emu
 local currentEmulator
-if memory then
+if client then
+    currentEmulator = "bizhawk"
+elseif memory then
     currentEmulator = "fceux"
 else
     currentEmulator = "mesen"
@@ -8,7 +11,7 @@ end
 
 -- emulator specific GUI and tunnel stuff, all of them provide onLoad()
 require("emus." .. currentEmulator)
-
+print("Detected " .. currentEmulator .. " emulator.")
 
 
 require "variables"
