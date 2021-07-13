@@ -1,9 +1,23 @@
+-- find out which emu we're doing
+local emu
+if memory then
+    emu = "fceux"
+else
+    emu = "mesen"
+end
+
+-- emulator specific GUI and tunnel stuff, all of them provide onLoad()
+require("emus." .. emu)
+
+
+
 require "variables"
 require "lib.websocket"
 require "getters"
 require "util"
 local frameManager = require "frameManager"
 local playfield = require "playfield"
+local socket = require "socket.core"
 
 
 local conn
@@ -16,10 +30,12 @@ function connect(url, cookie) -- called by the GUI
     else
         print("Connected successfully!")
 
-        emu.registerexit(function()
-            -- try our best to disconnect the socket on exit
-            wsclose(conn)
-        end)
+        if emu.registerexit then
+            emu.registerexit(function()
+                -- try our best to disconnect the socket on exit
+                wsclose(conn)
+            end)
+        end
     end
 end
 
@@ -42,20 +58,13 @@ function newGameStarted()
 end
 
 
-playfield.initialize()
-frameManager.update(0, 0)
-
-
 local previousPieceState = -1
 local previousGameState = -1
 
+playfield.initialize()
+frameManager.update(0, 0)
 
--- emulator specific GUI stuff, all of them call connect() at the end
-if true then
-    require "fceux"
-end
-
-while true do
+function loop()
     local gameState = getGameState()
     local pieceState = getPieceState()
     local time = socket.gettime()*1000
@@ -150,6 +159,6 @@ while true do
 
     previousPieceState = pieceState
     previousGameState = gameState
-
-	emu.frameadvance()
 end
+
+onLoad()

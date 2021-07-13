@@ -18,6 +18,7 @@ debug_mode = false
 local math = require "math"
 local string = require "string"
 local socket = require "socket.core"
+local bit = bit or require "lib.bit"
 
 -- local ltn12 = require "ltn12"
 
