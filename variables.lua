@@ -1,9 +1,8 @@
--- try to load environment.lua for default dialog values
-local f=io.open("environment.lua","r")
-if f~=nil then
-    io.close(f)
+-- try to load environment.lua
+pcall(function()
     require "environment"
-end
+    log("environment.lua loaded")
+end)
 
 PIECETABLE = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5, 6, 6} -- corresponds to PIECEPOSITIONTABLE
 

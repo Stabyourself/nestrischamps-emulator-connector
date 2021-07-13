@@ -1,8 +1,3 @@
--- environment.lua doesn't work yet
-DEFAULTURL = "ws://nestrischamps.herokuapp.com/ws/room/producer"
-DEFAULTCOOKIE = ""
-LOGGING = false
-
 memory = {}
 
 function memory.readbyte(address)
