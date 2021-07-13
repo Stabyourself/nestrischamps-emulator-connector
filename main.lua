@@ -1,13 +1,13 @@
 -- find out which emu we're doing
-local emu
+local currentEmulator
 if memory then
-    emu = "fceux"
+    currentEmulator = "fceux"
 else
-    emu = "mesen"
+    currentEmulator = "mesen"
 end
 
 -- emulator specific GUI and tunnel stuff, all of them provide onLoad()
-require("emus." .. emu)
+require("emus." .. currentEmulator)
 
 
 
