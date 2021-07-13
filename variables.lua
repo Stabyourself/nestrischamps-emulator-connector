@@ -5,9 +5,9 @@ if f~=nil then
     require "environment"
 end
 
-PIECETABLE = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5, 6, 6}
+PIECETABLE = {0, 0, 0, 0, 1, 1, 1, 1, 2, 2, 3, 4, 4, 5, 5, 5, 5, 6, 6} -- corresponds to PIECEPOSITIONTABLE
 
-PIECEGRAPHICTABLE = {"01", "10", "11", "01", "10", "11", "01"}
+PIECEGRAPHICTABLE = {"01", "10", "11", "01", "10", "11", "01"} -- which graphic each piece uses
 
 PIECEPOSITIONTABLE = {
     { { -1,  0 }, {  0,  0 }, {  1,  0 }, {  0, -1 }, },  -- 00: T up
@@ -37,7 +37,7 @@ PIECEPOSITIONTABLE = {
     { { -2,  0 }, { -1,  0 }, {  0,  0 }, {  1,  0 }, },  -- 12: I horizontal (spawn)
 }
 
-PLAYFIELDGRAPHICTABLE = {}
+PLAYFIELDGRAPHICTABLE = {} -- graphics used in the playfield
 PLAYFIELDGRAPHICTABLE[0xef] = "00" --empty
 PLAYFIELDGRAPHICTABLE[0x7b] = "01" -- 1
 PLAYFIELDGRAPHICTABLE[0x7d] = "10" -- 2

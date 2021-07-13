@@ -51,6 +51,8 @@ dialog =
         } -- /vbox
     }
 
-function showDialog()
+if AUTOCONNECT then
+    connect(DEFAULTURL, DEFAULTCOOKIE)
+else
     dialog:show()
 end

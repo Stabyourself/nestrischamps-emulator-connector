@@ -1,5 +1,4 @@
 require "variables"
-require "dialog"
 require "lib.websocket"
 require "getters"
 require "util"
@@ -51,11 +50,9 @@ local previousPieceState = -1
 local previousGameState = -1
 
 
-
-if AUTOCONNECT then
-    connect(DEFAULTURL, DEFAULTCOOKIE)
-else
-    showDialog()
+-- emulator specific GUI stuff, all of them call connect() at the end
+if true then
+    require "fceux"
 end
 
 while true do
