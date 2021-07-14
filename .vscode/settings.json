@@ -1,11 +1,14 @@
 {
     "Lua.diagnostics.globals": [
-        "love",
         "emu",
         "iup",
         "memory",
         "socket",
-        "client"
+        "client",
+        "DEFAULTURL",
+        "DEFAULTCOOKIE",
+        "AUTOCONNECT",
+        "LOGGING"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
