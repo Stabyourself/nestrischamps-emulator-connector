@@ -1,7 +1,7 @@
 memory = {}
 
 function memory.readbyte(address)
-    return emu.read(address, 0)
+    return emu.read(address, emu.memType.cpuDebug)
 end
 
 function print(...)
