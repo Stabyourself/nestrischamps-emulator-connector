@@ -1,6 +1,6 @@
 -- try to load environment.lua
 pcall(function()
-    require "environment"
+    require "nestrischamps.environment"
     log("environment.lua loaded")
 end)
 

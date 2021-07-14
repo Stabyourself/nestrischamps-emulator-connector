@@ -10,16 +10,16 @@ else
 end
 
 -- emulator specific GUI and tunnel stuff, all of them provide onLoad()
-require("emus." .. currentEmulator)
+require("nestrischamps.emus." .. currentEmulator)
 print("Detected " .. currentEmulator .. " emulator.")
 
 
-require "variables"
-require "lib.websocket"
-require "getters"
-require "util"
-local frameManager = require "frameManager"
-local playfield = require "playfield"
+require "nestrischamps.variables"
+require "nestrischamps.lib.websocket"
+require "nestrischamps.getters"
+require "nestrischamps.util"
+local frameManager = require "nestrischamps.frameManager"
+local playfield = require "nestrischamps.playfield"
 local socket = require "socket.core"
 
 

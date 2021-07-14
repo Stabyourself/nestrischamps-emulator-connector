@@ -1,4 +1,4 @@
-local playfield = require "playfield"
+local playfield = require "nestrischamps.playfield"
 
 local frameManager = {}
 frameManager.frame = nil
