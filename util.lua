@@ -1,12 +1,12 @@
-function toBits(num,bits)
-    -- returns a table of bits, most significant first.
+function toBits(num, bits)
+    -- returns a string of bits, most significant first.
     bits = bits or math.max(1, select(2, math.frexp(num)))
-    local t = {} -- will contain the bits
-    for b = bits, 1, -1 do
-        t[b] = math.fmod(num, 2)
-        num = math.floor((num - t[b]) / 2)
+
+    local out = ""
+    for b = bits-1, 0, -1 do
+        out = out .. ((num >> b) & 1)
     end
-    return table.concat(t, "")
+    return out
 end
 
 
