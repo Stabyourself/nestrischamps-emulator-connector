@@ -17,7 +17,7 @@ Because OCR is slow and unnecessary for emulators.
 
 ### Mesen
 - Extract or clone to Mesen/lua
-- Copy Mesen/lua/environment.example.lua to Mesen/lua/environment.lua
+- Copy Mesen/lua/environment.lua.example to Mesen/lua/environment.lua
 - Edit the file you just copied, putting your cookie into the DEFAULTCOOKIE string
 - Run Mesen, run Tetris
 - Go to Debug -> Script Window
@@ -25,7 +25,7 @@ Because OCR is slow and unnecessary for emulators.
 
 ### Bizhawk
 - Extract or clone to Bizhawk/Lua
-- Copy Bizhawk/Lua/environment.example.lua to Bizhawk/Lua/environment.lua
+- Copy Bizhawk/Lua/environment.lua.example to Bizhawk/Lua/environment.lua
 - Edit the file you just copied, putting your cookie into the DEFAULTCOOKIE string
 - Run Bizhawk, run Tetris
 - Go to Tools -> Lua Console
