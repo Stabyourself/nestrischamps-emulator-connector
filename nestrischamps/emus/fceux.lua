@@ -3,10 +3,10 @@ local dialog
 
 function createDialog()
     local defaultUrl = DEFAULTURL or "ws://nestrischamps.herokuapp.com/ws/room/producer"
-    local defaultCookie = DEFAULTCOOKIE or ""
+    local defaultSecret = DEFAULTSECRET or ""
 
     local urlInput = iup.text{size="400x",value=defaultUrl}
-    local cookieInput = iup.text{size="400x",value=defaultCookie}
+    local secretInput = iup.text{size="400x",value=defaultSecret}
 
     local function closeDialog()
         if dialog then
@@ -17,11 +17,11 @@ function createDialog()
 
     local function onConnect()
         local url = urlInput.value
-        local cookie = cookieInput.value
+        local secret = secretInput.value
 
         closeDialog()
 
-        connect(url, cookie)
+        connect(url, secret)
     end
 
     -- close the dialog when the script ends
@@ -35,8 +35,8 @@ function createDialog()
                     iup.vbox{
                         iup.label{title="Websocket URL (no ssl)"},
                         urlInput,
-                        iup.label{title="Cookie"},
-                        cookieInput,
+                        iup.label{title="Secret"},
+                        secretInput,
                         iup.button{
                             title="Connect!",
                             action = function (self)
@@ -56,7 +56,7 @@ end
 
 function onLoad()
     if AUTOCONNECT then
-        connect(DEFAULTURL, DEFAULTCOOKIE)
+        connect(DEFAULTURL, DEFAULTSECRET)
     else
         createDialog()
     end

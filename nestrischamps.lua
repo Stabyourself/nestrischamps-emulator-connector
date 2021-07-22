@@ -24,14 +24,16 @@ local socket = require "socket.core"
 
 
 local conn
-function connect(url, cookie) -- called by the emu plugin file
-    if not url or not cookie then
+function connect(url, secret) -- called by the emu plugin file
+    if not url or not secret then
         print("Settings not found. You need to set up an environment.lua for Mesen and Bizhawk, see environment.lua.example")
         error()
     end
 
+    url = url .. "/" .. secret
+
     local err
-    conn, err = wsopen(url, cookie)
+    conn, err = wsopen(url)
     if not conn then
         print("Connection failed: " .. err)
         error()

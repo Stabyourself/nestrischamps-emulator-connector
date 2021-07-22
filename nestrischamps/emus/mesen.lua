@@ -9,7 +9,7 @@ function print(...)
 end
 
 function onLoad()
-    connect(DEFAULTURL, DEFAULTCOOKIE)
+    connect(DEFAULTURL, DEFAULTSECRET)
 
     emu.addEventCallback(loop, emu.eventType.endFrame) -- main loop
 end

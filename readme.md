@@ -13,12 +13,12 @@ Because OCR is slow and unnecessary for emulators.
 - Go to File -> Lua -> New Lua Script Window
 - Browse to FCEUX/luaScripts/nestrischamps.lua
 - Hit run
-- Enter the websocket URL and your cookie
+- Enter the websocket URL and your secret
 
 ### Mesen
 - Extract to Mesen/lua, creating the folder if it doesn't exist
 - Copy Mesen/lua/nestrischamps/environment.lua.example to Mesen/lua/nestrischamps/environment.lua
-- Edit the file you just copied, putting your cookie into the DEFAULTCOOKIE string
+- Edit the file you just copied, putting your secret into the DEFAULTSECRET string
 - Run Mesen, run Tetris
 - Go to Debug -> Script Window
 - Go to File -> Open and browse to Mesen/lua/nestrischamps.lua
@@ -26,11 +26,11 @@ Because OCR is slow and unnecessary for emulators.
 ### Bizhawk
 - Extract to Bizhawk/Lua
 - Copy Bizhawk/Lua/nestrischamps/environment.lua.example to Bizhawk/Lua/nestrischamps/environment.lua
-- Edit the file you just copied, putting your cookie into the DEFAULTCOOKIE string
+- Edit the file you just copied, putting your secret into the DEFAULTSECRET string
 - Run Bizhawk, run Tetris
 - Go to Tools -> Lua Console
 - Go to Script -> Open Script and browse to Bizhawk/Lua/nestrischamps.lua
 
 If it worked, it should say "Connected successfully!". You can then go to your renderer (go to https://nestrischamps.herokuapp.com/renderers and select Simple 1p) and it should display any game you start.
 
-To find your cookie, you can go to your browser's devtools while on the NestrisChamps website. You'll find Cookies in the "Application" tab in webkit and the "Storage" tab in Firefox. It looks something like `s%3A...`
+You can find your secret on the NestrisChamps settings page, https://nestrischamps.herokuapp.com/settings

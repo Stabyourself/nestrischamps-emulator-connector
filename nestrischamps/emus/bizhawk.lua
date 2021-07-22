@@ -1,5 +1,5 @@
 function onLoad()
-    connect(DEFAULTURL, DEFAULTCOOKIE)
+    connect(DEFAULTURL, DEFAULTSECRET)
 
     while true do -- main loop
         loop()

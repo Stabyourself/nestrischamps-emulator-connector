@@ -120,8 +120,8 @@ local function wsupgrade( wsconn )
 	-- Generate key/nonce, 16 bytes base64-encoded
 	local key = "2l6ddR5P/VGWXrsCD6n3ZQ=="
 	-- Ref: https://stackoverflow.com/questions/18265128/what-is-sec-websocket-key-for
-	local req = string.format("GET %s HTTP/1.1\r\nHost: %s\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Key: %s\r\nSec-WebSocket-Version: 13\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\r\nCookie: nsid=%s\r\n%s\r\n",
-		wsconn.path, wsconn.ip, key, wsconn.cookie, uhead)
+	local req = string.format("GET %s HTTP/1.1\r\nHost: %s\r\nUpgrade: websocket\r\nConnection: Upgrade\r\nSec-WebSocket-Key: %s\r\nSec-WebSocket-Version: 13\r\nUser-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36\r\n%s\r\n",
+		wsconn.path, wsconn.ip, key, uhead)
 
 	-- Send request.
 	D("wsupgrade() sending %1", req)
@@ -180,7 +180,7 @@ local function connect( ip, port )
 	return nil, string.format("Connection to %s:%s failed: %s", ip, port, tostring(e))
 end
 
-function wsopen( url, cookie )
+function wsopen( url )
 	D("wsopen(%1)", url)
 	local options = {}
 	options.receive_timeout = default( options.receive_timeout, DEFAULTMSGTIMEOUT )
@@ -206,7 +206,6 @@ function wsopen( url, cookie )
 	if path == "" then path = "/" end
 
 	local wsconn = {}
-	wsconn.cookie = cookie
 	wsconn.connected = false
 	wsconn.proto = proto
 	wsconn.ip = ip

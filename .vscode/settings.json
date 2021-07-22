@@ -6,7 +6,7 @@
         "socket",
         "client",
         "DEFAULTURL",
-        "DEFAULTCOOKIE",
+        "DEFAULTSECRET",
         "AUTOCONNECT",
         "LOGGING"
     ],
