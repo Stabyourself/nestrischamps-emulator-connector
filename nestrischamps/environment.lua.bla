@@ -1,8 +1,0 @@
--- DEFAULTURL = "ws://stys.eu:5000/ws/room/producer"
--- DEFAULTSECRET = "s%3A263c4145-e200-4e8a-8dc9-9bb51d86ca59.%2FJXwkiO5Fwb1dK5LystA0%2F95BHe44hWkVTAfCx9tGkw"
-
-DEFAULTURL = "ws://nestrischamps.herokuapp.com/ws/room/u/mauricesy/producer"
-DEFAULTSECRET = "01F843RADNQWH6FT7NF795M7CG"
-
-AUTOCONNECT = true
-LOGGING = false
