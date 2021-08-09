@@ -16,8 +16,9 @@ Because OCR is slow and unnecessary for emulators.
 - Enter the websocket URL and your secret
 
 ### Mesen
-- Extract to Mesen/lua, creating the folder if it doesn't exist
-- Copy Mesen/lua/nestrischamps/environment.lua.example to Mesen/lua/nestrischamps/environment.lua
+- **On Windows:** Extract to Mesen/lua, creating the folder if it doesn't exist
+- **On Linux:** Extract to Mesen
+- Copy nestrischamps/environment.lua.example to Mesen/lua/nestrischamps/environment.lua
 - Edit the file you just copied, putting your secret into the DEFAULTSECRET string
 - Run Mesen, run Tetris
 - Go to Debug -> Script Window
@@ -25,7 +26,7 @@ Because OCR is slow and unnecessary for emulators.
 
 ### Bizhawk
 - Extract to Bizhawk/Lua
-- Copy Bizhawk/Lua/nestrischamps/environment.lua.example to Bizhawk/Lua/nestrischamps/environment.lua
+- Copy nestrischamps/environment.lua.example to nestrischamps/environment.lua
 - Edit the file you just copied, putting your secret into the DEFAULTSECRET string
 - Run Bizhawk, run Tetris
 - Go to Tools -> Lua Console
