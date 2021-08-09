@@ -11,7 +11,7 @@ Because OCR is slow and unnecessary for emulators.
 - Extract to FCEUX/luaScripts
 - Run FCEUX, run Tetris
 - Go to File -> Lua -> New Lua Script Window
-- Browse to FCEUX/luaScripts/nestrischamps.lua
+- Browse to nestrischamps.lua
 - Hit run
 - Enter the websocket URL and your secret
 
@@ -22,7 +22,7 @@ Because OCR is slow and unnecessary for emulators.
 - Edit the file you just copied, putting your secret into the DEFAULTSECRET string
 - Run Mesen, run Tetris
 - Go to Debug -> Script Window
-- Go to File -> Open and browse to Mesen/lua/nestrischamps.lua
+- Go to File -> Open and browse to nestrischamps.lua
 
 ### Bizhawk
 - Extract to Bizhawk/Lua
@@ -30,7 +30,7 @@ Because OCR is slow and unnecessary for emulators.
 - Edit the file you just copied, putting your secret into the DEFAULTSECRET string
 - Run Bizhawk, run Tetris
 - Go to Tools -> Lua Console
-- Go to Script -> Open Script and browse to Bizhawk/Lua/nestrischamps.lua
+- Go to Script -> Open Script and browse to nestrischamps.lua
 
 If it worked, it should say "Connected successfully!". You can then go to your renderer (go to https://nestrischamps.herokuapp.com/renderers and select Simple 1p) and it should display any game you start.
 
