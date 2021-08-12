@@ -223,6 +223,7 @@ function wsopen( url )
 	end
 	wsconn.socket = sock
 	wsconn.socket:setoption( 'keepalive', true )
+	wsconn.socket:setoption( 'tcp-nodelay', true ) -- we're a real time application of sorts and thus we need to get packets out as soon as possible
 	if proto == "wss" then
 		D("wsopen() preping for SSL connection")
 		local ssl = require "ssl"
