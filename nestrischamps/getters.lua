@@ -7,6 +7,16 @@ function getGameState() -- gameState is a global thing for which menu/demo/gamep
 end
 
 function getScore()
+	local is_gym_v5 = memory.readbyterange(0x075B, 5) == "T-GYM"
+	if is_gym_v5 then
+		local byte1 = string.format("%x", memory.readbyte(0x000C))
+		local byte2 = string.format("%x", memory.readbyte(0x000D))
+		local byte3 = string.format("%x", memory.readbyte(0x000E))
+		local byte4 = string.format("%x", memory.readbyte(0x000F))
+		local score = math.floor(byte4 * 1000000 + byte3 * 10000 + byte2 * 100 + byte1) -- mesen likes to return floats
+		return score
+	end
+
 	local scoreLeft = tonumber(string.format("%x", memory.readbyte(0x0055)))
 
 	local scoreMiddle = tonumber(string.format("%x", memory.readbyte(0x0054)))
