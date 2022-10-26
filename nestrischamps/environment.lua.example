@@ -1,4 +1,4 @@
-DEFAULTURL = "ws://nestrischamps.herokuapp.com/ws/room/producer"
+DEFAULTURL = "ws://nestrischamps.io/ws/room/producer"
 DEFAULTSECRET = ""
 
 AUTOCONNECT = false -- skips the dialog and uses the above values instead
