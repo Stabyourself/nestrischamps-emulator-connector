@@ -32,6 +32,6 @@ Because OCR is slow and unnecessary for emulators.
 - Go to Tools -> Lua Console
 - Go to Script -> Open Script and browse to nestrischamps.lua
 
-If it worked, it should say "Connected successfully!". You can then go to your renderer (go to https://nestrischamps.herokuapp.com/renderers and select Simple 1p) and it should display any game you start.
+If it worked, it should say "Connected successfully!". You can then go to your renderer (go to https://nestrischamps.io/renderers and select Simple 1p) and it should display any game you start.
 
-You can find your secret on the NestrisChamps settings page, https://nestrischamps.herokuapp.com/settings
+You can find your secret on the NestrisChamps settings page, https://nestrischamps.io/settings

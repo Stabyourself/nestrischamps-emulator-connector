@@ -2,7 +2,7 @@ require("iuplua")
 local dialog
 
 function createDialog()
-    local defaultUrl = DEFAULTURL or "ws://nestrischamps.herokuapp.com/ws/room/producer"
+    local defaultUrl = DEFAULTURL or "ws://nestrischamps.io/ws/room/producer"
     local defaultSecret = DEFAULTSECRET or ""
 
     local urlInput = iup.text{size="400x",value=defaultUrl}
