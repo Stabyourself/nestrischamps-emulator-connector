@@ -1,4 +1,7 @@
-require("iuplua")
+if not iup then
+    require("iuplua")
+end
+
 local dialog
 
 function createDialog()
