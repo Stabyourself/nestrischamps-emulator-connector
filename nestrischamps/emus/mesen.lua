@@ -1,7 +1,7 @@
 memory = {}
 
 function memory.readbyte(address)
-    return emu.read(address, emu.memType.nesDebug)
+    return emu.read(address, emu.memType.nesDebug or emu.memType.cpuDebug) -- handle constants for both mesen 2 and 1
 end
 
 function memory.readbyterange(address, bytes)
