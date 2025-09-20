@@ -68,7 +68,7 @@ function newGameStarted()
 end
 
 
-local DELAY_NEW_GAME_NUM_FRAMES = 1 -- num frames to wait before starting new game
+local DELAY_NEW_GAME_NUM_FRAMES = 5 -- num frames to wait before starting new game
 
 local previousPieceState = -1
 local previousGameState = -1
