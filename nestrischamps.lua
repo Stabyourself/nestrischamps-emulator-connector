@@ -68,11 +68,8 @@ function newGameStarted()
 end
 
 
-local DELAY_NEW_GAME_NUM_FRAMES = 5 -- num frames to wait before starting new game
-
 local previousPieceState = -1
 local previousGameState = -1
-local numPendingFrames = -1
 
 playfield.initialize()
 frameManager.update(0, 0)
@@ -87,20 +84,9 @@ function loop()
 
     if gameState == 4 then --ingame, rocket, highscoreentry
         if previousGameState ~= 4 then -- possibly just started a game
-            if numPendingFrames < 0 then
-                -- Kinda gross delay before starting a new game :'(
-                -- 1 frame delay is needed because gameState changes before the game data are reset
-                -- We need to avoid sending one frame of old game data into the new game
-                numPendingFrames = DELAY_NEW_GAME_NUM_FRAMES
-            end
-
-            numPendingFrames = numPendingFrames - 1
-
-            if numPendingFrames < 0 then
-                -- delay elapsed, start a new game
+            if (getGameModeState() == 1) then -- new game is only ready when gameModeState transisions to 1
                 newGameStarted()
             else
-                -- delay ongoing, don't do anything
                 return
             end
         end

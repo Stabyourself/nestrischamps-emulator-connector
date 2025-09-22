@@ -6,6 +6,10 @@ function getGameState() -- gameState is a global thing for which menu/demo/gamep
     return memory.readbyte(0x00C0)
 end
 
+function getGameModeState() -- gameModeState turns to 1 in a new game
+    return memory.readbyte(0x00A7)
+end
+
 function getScore()
 	local is_gym_v5 = memory.readbyterange(0x075B, 5) == "T-GYM"
 	if is_gym_v5 then
