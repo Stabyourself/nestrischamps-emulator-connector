@@ -66,6 +66,21 @@ function getCurrentPiece()
     return memory.readbyte(0x0042)
 end
 
+function getCurPiece()
+    curPiece = getCurrentPiece()
+    pieceID = PIECETABLE[curPiece+1]
+
+    if pieceId == nil then
+        pieceID = 7 -- 7 is 0b111 which represents null for transmission
+    end
+
+    return pieceID
+end
+
+function getInstantDas()
+    return memory.readbyte(0x0046) -- autoRepeatX
+end
+
 function getLinesBeingCleared()
     local linesBeingCleared = {}
 

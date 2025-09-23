@@ -1,4 +1,4 @@
-function toBits(num,bits)
+function toBits(num, bits)
     -- returns a table of bits, most significant first.
     bits = bits or math.max(1, select(2, math.frexp(num)))
     local t = {} -- will contain the bits
@@ -10,28 +10,29 @@ function toBits(num,bits)
 end
 
 
-function makeFrame(ms, gameNo, score, lines, level, preview, playfield, statistics)
+function makeFrame(ms, gameNo, score, lines, level, preview, playfield, statistics, curPiece, curPieceDas, instantDas)
     -- all of this is bad and slow
     bits = {
-        "001", -- version
+        "011", -- version (format format v3)
         "01", -- game type (classic)
         "000", -- player number (always 0 for client)
         toBits(gameNo, 16), -- game
         toBits(ms, 28), -- milliseconds
-        toBits(score, 21), -- score
-        toBits(lines, 9), -- lines
-        toBits(level, 6), -- level
-        "11111", -- DAS stuff
+        toBits(lines, 12), -- lines
+        toBits(level, 8), -- level
+        toBits(score, 24), -- score
+        toBits(instantDas, 5), -- instant das
         toBits(preview, 3), -- preview
-        "11111", -- DAS stuff
-        "111", -- DAS stuff
-        toBits(statistics[1], 8), -- piece counts
-        toBits(statistics[2], 8),
-        toBits(statistics[3], 8),
-        toBits(statistics[4], 8),
-        toBits(statistics[5], 8),
-        toBits(statistics[6], 8),
-        toBits(statistics[7], 8),
+        toBits(curPieceDas, 5), -- cur piece das
+        toBits(curPiece, 3), -- cur piece
+        toBits(statistics[1], 10), -- piece counts
+        toBits(statistics[2], 10),
+        toBits(statistics[3], 10),
+        toBits(statistics[4], 10),
+        toBits(statistics[5], 10),
+        toBits(statistics[6], 10),
+        toBits(statistics[7], 10),
+        "11", -- wasted bits
         playfield, --playfield
     }
 
@@ -45,9 +46,6 @@ function makeFrame(ms, gameNo, score, lines, level, preview, playfield, statisti
 
         out = out .. string.char(num)
     end
-
-    -- adding an empty byte to the end because the server expects 71 bytes
-    out = out .. string.char(0)
 
     return out
 end

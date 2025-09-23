@@ -51,11 +51,13 @@ end
 
 local startTime = socket.gettime()*1000 -- questionable use of socket
 local lastFrame = startTime
-local gameNo = 0
+local gameNo = 1
+local pieceSpawnDas = 16
 local state = {}
 
 function newGameStarted()
     gameNo = gameNo + 1
+
     print("Started game #" .. gameNo)
 
     state = {
@@ -72,7 +74,7 @@ local previousPieceState = -1
 local previousGameState = -1
 
 playfield.initialize()
-frameManager.update(0, 0)
+frameManager.update(0, gameNo, pieceSpawnDas)
 
 function loop()
     local gameState = getGameState()
@@ -134,6 +136,9 @@ function loop()
         elseif pieceState == 5 then -- dummy frame, but we're abusing it for score update.
             newFrame = true
 
+        elseif pieceState == 8 then -- piece spawn, record das value
+            pieceSpawnDas = getInstantDas()
+
         elseif pieceState  == 10 then -- curtain + rocket
             if previousPieceState ~= 10 then
                 playfield.curtainNum = 0
@@ -159,7 +164,7 @@ function loop()
         local ms = math.floor(time - startTime)
 
         if newFrame then
-            frameManager.update(ms, gameNo)
+            frameManager.update(ms, gameNo, pieceSpawnDas)
             log("Sending new frame (" .. ms .. ")")
         elseif resendFrame then
             log("Resending an old frame.")
